@@ -20,13 +20,32 @@
     <div>
       <button v-if="!isLoggedIn" @click="login">Login</button>
       <button v-if="isLoggedIn" @click="logout">Logout</button>
+     
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  inject: ['isLoggedIn', 'login', 'logout', 'cart'],
+  // inject: [ 'cart'],
+  computed:{
+    isLoggedIn() {
+      return this.$store.getters.isAuthLogin;
+    },
+    cart(){
+      return this.$store.getters.cart
+    }
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('login');
+    },
+    logout() {
+      this.$store.dispatch('logout');
+    },
+    
+  },
+  
 };
 </script>
 
